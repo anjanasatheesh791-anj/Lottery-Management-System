@@ -6,8 +6,8 @@ import ForgotPassword from "./Pages/ForgotPassword"
 import OtpVerify from "./Pages/Otpverify"
 import AdminDashboard from "./Pages/AdminDashboard"
 import CreateContest from "./Pages/CreateContest"
-import QrContest from "./pages/qrcontest";
-import JoinContest from "./pages/JoinContest";
+import QrContest from "./Pages/qrcontest";
+import JoinContest from "./Pages/JoinContest";
 
 
 export default function App() {
