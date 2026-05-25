@@ -16,9 +16,13 @@ $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
 try {
      $pdo = new PDO($dsn, $user, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); 
 } catch (\PDOException $e) {
-     echo json_encode(["status" => "error", "message" => "Connection failed."]);
+     echo json_encode([
+          "status" => "error",
+          "message" => $e->getMessage()
+     ]);
      exit;
 }
+
 
 // 2. PROCESS LOGIN
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
