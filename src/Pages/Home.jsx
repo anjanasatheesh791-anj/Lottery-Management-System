@@ -10,10 +10,43 @@ SpinVault
 </h1>
 
 <ul className="hidden md:flex gap-8 text-lg">
-<li className="hover:text-teal-400 cursor-pointer duration-300">Home</li>
-<li className="hover:text-teal-400 cursor-pointer duration-300">Games</li>
-<li className="hover:text-teal-400 cursor-pointer duration-300">Winners</li>
-<li className="hover:text-teal-400 cursor-pointer duration-300">Contact</li>
+
+<li>
+<a
+href="#home"
+className="hover:text-teal-400 cursor-pointer duration-300"
+>
+Home
+</a>
+</li>
+
+<li>
+<a
+href="#Why SpinVault"
+className="hover:text-teal-400 cursor-pointer duration-300"
+>
+Why SpinVault
+</a>
+</li>
+
+<li>
+<a
+href="#winners"
+className="hover:text-teal-400 cursor-pointer duration-300"
+>
+Winners
+</a>
+</li>
+
+<li>
+<a
+href="#contact"
+className="hover:text-teal-400 cursor-pointer duration-300"
+>
+Contact
+</a>
+</li>
+
 </ul>
 
 <div className="flex gap-4">
@@ -43,7 +76,7 @@ SpinVault
 
 
 {/* HERO SECTION */}
-<section className="px-8 py-20">
+<section id="home" className="px-8 py-20">
 
 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
@@ -136,7 +169,7 @@ className="w-[420px] h-[420px] object-cover rounded-3xl border border-gray-700 s
 
 
 {/* WHY CHOOSE SECTION */}
-<section className="px-8 pb-20">
+<section id="Why SpinVault" className="px-8 pb-20">
 
 <div className="text-center mb-14">
 
@@ -212,6 +245,94 @@ Secure Platform
 <p className="text-gray-400 leading-7">
 Safe user accounts and secure online transactions.
 </p>
+
+</div>
+
+</div>
+
+</section>
+
+
+{/* WINNERS SECTION */}
+<section id="winners" className="px-8 pb-20">
+
+<div className="text-center mb-14">
+
+<h2 className="text-4xl font-bold mb-4">
+Recent <span className="text-purple-400">Winners</span>
+</h2>
+
+<p className="text-gray-400 text-lg">
+Congratulations to our lucky players.
+</p>
+
+</div>
+
+
+<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+{/* WINNER 1 */}
+<div className="bg-gray-900 p-8 rounded-2xl border border-gray-800 text-center hover:-translate-y-2 duration-300">
+
+<div className="w-24 h-24 bg-purple-500/20 rounded-full flex items-center justify-center text-3xl font-bold text-purple-400 mx-auto mb-5">
+A
+</div>
+
+<h3 className="text-2xl font-bold mb-3">
+Arjun Nair
+</h3>
+
+<p className="text-gray-400 mb-2">
+Won Prize
+</p>
+
+<h2 className="text-3xl font-bold text-teal-400">
+₹15,000
+</h2>
+
+</div>
+
+
+{/* WINNER 2 */}
+<div className="bg-gray-900 p-8 rounded-2xl border border-gray-800 text-center hover:-translate-y-2 duration-300">
+
+<div className="w-24 h-24 bg-teal-500/20 rounded-full flex items-center justify-center text-3xl font-bold text-teal-400 mx-auto mb-5">
+S
+</div>
+
+<h3 className="text-2xl font-bold mb-3">
+Sneha Joseph
+</h3>
+
+<p className="text-gray-400 mb-2">
+Won Prize
+</p>
+
+<h2 className="text-3xl font-bold text-purple-400">
+₹25,000
+</h2>
+
+</div>
+
+
+{/* WINNER 3 */}
+<div className="bg-gray-900 p-8 rounded-2xl border border-gray-800 text-center hover:-translate-y-2 duration-300">
+
+<div className="w-24 h-24 bg-purple-500/20 rounded-full flex items-center justify-center text-3xl font-bold text-purple-400 mx-auto mb-5">
+R
+</div>
+
+<h3 className="text-2xl font-bold mb-3">
+Rahul Menon
+</h3>
+
+<p className="text-gray-400 mb-2">
+Won Prize
+</p>
+
+<h2 className="text-3xl font-bold text-teal-400">
+₹50,000
+</h2>
 
 </div>
 
@@ -297,7 +418,7 @@ Safe user accounts and secure online transactions.
 
 
 {/* FOOTER */}
-<footer className="bg-gray-900 border-t border-gray-800 px-8 py-10">
+<footer id="contact" className="bg-gray-900 border-t border-gray-800 px-8 py-10">
 
   <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
 
@@ -368,6 +489,7 @@ Safe user accounts and secure online transactions.
     </div>
 
   </div>
+  
 
 
   {/* BOTTOM */}
