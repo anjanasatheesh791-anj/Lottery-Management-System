@@ -10,8 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // 1. DATABASE CONNECTION
-$configFile = dirname(__DIR__) . '/Config/db.php';
-require_once $configFile; 
+require_once __DIR__ . '/../Config/db.php';
 
 $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
 try {
