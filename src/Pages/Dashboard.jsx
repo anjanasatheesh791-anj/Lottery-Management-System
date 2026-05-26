@@ -42,13 +42,13 @@ export default function Dashboard() {
     }
 
     /* ---------------- USER FETCH ---------------- */
-    fetch(`http://localhost/Lottery%20Management%20System/Lottery-Management-System/Backend/api/get_user.php?id=${userId}`)
+    fetch(`https://lottery-management-system-backend.onrender.com/api/get_user.php?id=${userId}`)
       .then(async (res) => JSON.parse(await res.text()))
       .then((data) => data.status === "success" && setUser(data.user))
       .catch((err) => console.log("USER FETCH ERROR:", err));
 
     /* ---------------- WALLET FETCH ---------------- */
-    fetch(`http://localhost/Lottery%20Management%20System/Lottery-Management-System/Backend/api/get_wallet.php?id=${userId}`)
+    fetch(`https://lottery-management-system-backend.onrender.com/api/get_wallet.php?id=${userId}`)
       .then(async (res) => JSON.parse(await res.text()))
       .then((walletData) => walletData.status === "success" && setWallet(walletData.wallets))
       .catch((err) => console.log("WALLET FETCH ERROR:", err));

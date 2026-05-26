@@ -17,7 +17,7 @@ export default function QrContest() {
   const fetchContests = async () => {
   try {
     const response = await axios.get(
-      `http://${CURRENT_PC_IP}/Lottery%20Management%20System/Lottery-Management-System/Backend/api/get_contests.php`
+      `https://lottery-management-system-backend.onrender.com/api/get_contests.php`
     );
 
     console.log(response.data);

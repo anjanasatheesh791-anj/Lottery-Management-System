@@ -18,7 +18,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost/Lottery%20Management%20System/Lottery-Management-System/Backend/api/Login.php", {
+      const response = await fetch("https://lottery-management-system-backend.onrender.com/api/Login.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

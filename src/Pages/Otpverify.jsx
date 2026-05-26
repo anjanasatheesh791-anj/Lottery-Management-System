@@ -35,7 +35,7 @@ export default function OtpVerify() {
 
     try {
       // Execute the async HTTP network fetch to your PHP backend api
-      const response = await fetch("http://localhost/Lottery%20Management%20System/Lottery-Management-System/Backend/api/OtpVerify.php", {
+      const response = await fetch("https://lottery-management-system-backend.onrender.com/api/OtpVerify.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

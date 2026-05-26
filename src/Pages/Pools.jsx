@@ -13,7 +13,7 @@ export default function Pools() {
 
   // Fetch all active public pools for the grid directory list
   const fetchPools = () => {
-    fetch("http://localhost/Lottery%20Management%20System/Lottery-Management-System/Backend/api/get_all_pools.php")
+    fetch("https://lottery-management-system-backend.onrender.com/api/get_all_pools.php")
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "success") {
@@ -38,7 +38,7 @@ export default function Pools() {
     setSelectedPool(pool);
     setDetailsLoading(true);
     
-    fetch(`http://localhost/Lottery%20Management%20System/Lottery-Management-System/Backend/api/get_pool_details.php?pool_id=${pool.id}&pool_source=${pool.pool_source}`)
+    fetch(`https://lottery-management-system-backend.onrender.com/api/get_pool_details.php?pool_id=${pool.id}&pool_source=${pool.pool_source}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "success") {
@@ -65,7 +65,7 @@ export default function Pools() {
 
     setJoiningId(poolId);
 
-    fetch("http://localhost/Lottery%20Management%20System/Lottery-Management-System/Backend/api/join_pool.php", {
+    fetch("https://lottery-management-system-backend.onrender.com/api/join_pool.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

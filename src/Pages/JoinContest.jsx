@@ -11,7 +11,7 @@ export default function JoinContest() {
   const [error, setError] = useState("");
 
   // 🌟 Double-check that this matches your current laptop IP address from cmd (ipconfig)
-  const CURRENT_PC_IP = "192.168.29.17"; 
+ 
 
   useEffect(() => {
     fetchContestDetails();
@@ -22,7 +22,7 @@ export default function JoinContest() {
       setLoading(true);
       // 🎯 TARGETING YOUR EXISTING FILE WITH THE NEW ?id= PARAMETER
       const response = await axios.get(
-        `http://${CURRENT_PC_IP}/Lottery%20Management%20System/Lottery-Management-System/Backend/api/get_contests.php?id=${id}`
+        `https://lottery-management-system-backend.onrender.com/api/get_contests.php?id=${id}`
       );
 
       if (response.data.success) {
