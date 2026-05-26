@@ -51,7 +51,7 @@ export default function JoinContest() {
     try {
       // Send join action to your registration pool engine
       const response = await axios.post(
-        `http://${CURRENT_PC_IP}/Lottery%20Management%20System/Lottery-Management-System/Backend/api/join_contest_handler.php`,
+        `https://lottery-management-system-backend.onrender.com/api/join_contest_handler.php`,
         {
           contest_id: id,
           user_id: user.id

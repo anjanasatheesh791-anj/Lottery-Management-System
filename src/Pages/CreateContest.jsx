@@ -26,7 +26,7 @@ export default function CreateContest() {
       };
 
       const response = await axios.post(
-        "http://localhost/Lottery%20Management%20System/Lottery-Management-System/Backend/api/create_contest.php",
+        "https://lottery-management-system-backend.onrender.com/api/create_contest.php",
         payload
       );
 

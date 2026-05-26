@@ -17,7 +17,7 @@ export default function MyPools() {
     }
 
     // Direct endpoint connection targeting your local machine architecture
-    fetch(`http://localhost/Lottery%20Management%20System/Lottery-Management-System/Backend/api/get_user_pools.php?user_id=${userId}`)
+    fetch(`https://lottery-management-system-backend.onrender.com/api/get_user_pools.php?user_id=${userId}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "success") {

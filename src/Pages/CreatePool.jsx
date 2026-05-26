@@ -85,7 +85,7 @@ export default function CreatePool() {
       prize_pool: summary.totalPrizePool,
     };
 
-    fetch("http://localhost/Lottery%20Management%20System/Lottery-Management-System/Backend/api/create_pool.php", {
+    fetch("https://lottery-management-system-backend.onrender.com/api/create_pool.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
