@@ -39,7 +39,7 @@ export default function App() {
 
         <Route path="/CreateContest" element={<CreateContest />} />
 
-        <Route path="/generate-qr" element={<qrcontest />} />
+        <Route path="/generate-qr" element={<Qrcontest />} />
 
         <Route path="/join-contest/:id" element={<JoinContest />} />
 
