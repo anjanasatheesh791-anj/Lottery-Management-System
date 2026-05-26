@@ -4,7 +4,7 @@ header("Access-Control-Allow-Origin:*");
 header("Access-Control-Allow-Headers:*"); // Added to prevent any mobile network CORS blocks
 header("Content-Type: application/json");
 
-include __DIR__ . "/../Config/db.php";
+include __DIR__ . "/../config/db.php";
 
 // 🌟 CHECK IF A SPECIFIC CONTEST ID WAS REQUESTED
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
