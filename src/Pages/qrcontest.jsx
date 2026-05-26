@@ -7,8 +7,7 @@ export default function QrContest() {
   const [selectedContest, setSelectedContest] = useState(null);
 
   
-  const CURRENT_PC_IP = "10.243.61.70"; 
-
+ 
   // FETCH CONTESTS
   useEffect(() => {
     fetchContests();
@@ -84,13 +83,13 @@ export default function QrContest() {
 
           <div className="bg-white inline-block p-5 rounded-2xl shadow-xl">
             <QRCodeCanvas
-              value={`http://${CURRENT_PC_IP}:5173/contest-details/${selectedContest.id}`}
+              value={`https://lottery-management-system.vercel.app/contest-details/${selectedContest.id}`}
               size={250}
             />
           </div>
 
           <p className="text-gray-400 mt-6 break-all font-mono text-sm bg-black/30 p-3 rounded-xl inline-block">
-            `http://${CURRENT_PC_IP}:5173/contest-details/${selectedContest.id}`
+            `https://lottery-management-system.vercel.app/contest-details/${selectedContest.id}`
           </p>
         </div>
       )}
