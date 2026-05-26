@@ -1,6 +1,6 @@
 <?php
 
-header("Access-Control-Allow-Origin:*");
+header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Content-Type: application/json");
@@ -10,7 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
-require_once dirname(__DIR__) . '/config/db.php';
+$host = getenv("MYSQLHOST");
+$user = getenv("MYSQLUSER");
+$password = getenv("MYSQLPASSWORD");
+$dbname = getenv("MYSQLDATABASE");
+$port = getenv("MYSQLPORT");
 
 try {
 
@@ -27,6 +31,8 @@ try {
 
     echo json_encode([
         "status" => "error",
-        "message" => $e->getMessage()
+        "message" => $e->getMessage(),
+        "host" => $host,
+        "port" => $port
     ]);
 }
