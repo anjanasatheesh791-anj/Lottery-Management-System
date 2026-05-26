@@ -30,7 +30,7 @@ export default function Signup() {
     setLoading(true)
 
     try {
-      const response = await fetch("https://lottery-management-system-backend.onrender.com/api/Signup.php", {
+      const response = await fetch("https://lottery-management-system-backend.onrender.com/api/signup.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
