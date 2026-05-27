@@ -49,12 +49,34 @@ export default function Signup() {
   console.log("RAW RESPONSE:", text)
 
   const data = JSON.parse(text)
+if (data.status === "success") {
 
-  if (data.status === "success") {
-    navigate("/OtpVerify", { state: { userId: data.user_id } })
+  const otpResponse = await fetch(
+    "https://lottery-management-system-backend.onrender.com/api/generateOtp.php",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id: data.user_id,
+      }),
+    }
+  );
+
+  const otpData = await otpResponse.json();
+
+  console.log("OTP API RESPONSE:", otpData);
+
+  if (otpData.status === "success") {
+    navigate("/OtpVerify", { state: { userId: data.user_id } });
   } else {
-    setError(data.message || "Registration failed.")
+    setError(otpData.message || "OTP generation failed.");
   }
+
+} else {
+  setError(data.message || "Registration failed.");
+}
 
 } catch (err) {
   console.error(err)
