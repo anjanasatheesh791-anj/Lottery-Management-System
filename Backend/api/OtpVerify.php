@@ -13,14 +13,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // 2. DATABASE CONNECTION
-$configFile = dirname(__DIR__) . '/config/db.php';
-if (!file_exists($configFile)) {
-    echo json_encode(["status" => "error", "message" => "db.php file not found."]);
-    exit;
-}
-require_once $configFile; 
+$host = getenv("MYSQLHOST");
+$user = getenv("MYSQLUSER");
+$password = getenv("MYSQLPASSWORD");
+$dbname = getenv("MYSQLDATABASE");
+$port = getenv("MYSQLPORT");
 
-$dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4"; 
+
+
+$dsn = "mysql:host=$host;dbname=$dbname;port=$port;charset=utf8mb4"; 
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,

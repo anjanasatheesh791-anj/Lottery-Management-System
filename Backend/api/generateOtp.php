@@ -64,6 +64,10 @@ if (!$user_id) {
 $otp = rand(100000, 999999);
 $expires_at = date("Y-m-d H:i:s", strtotime("+10 minutes"));
 
+// Delete previous OTPs for this user
+$delete = $pdo->prepare("DELETE FROM otp_verifications WHERE user_id = ?");
+$delete->execute([$user_id]);
+
 // Insert OTP
 $stmt = $pdo->prepare("
     INSERT INTO otp_verifications (user_id, otp_code, expires_at)
