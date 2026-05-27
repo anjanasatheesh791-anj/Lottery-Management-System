@@ -1,6 +1,6 @@
 <?php
 
-header("Access-Control-Allow-Origin:*");
+header("Access-Control-Allow-Origin:https://lottery-management-system.vercel.app");
 header("Content-Type: application/json");
 
 $host = getenv("MYSQLHOST");
