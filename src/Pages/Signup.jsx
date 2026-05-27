@@ -29,35 +29,39 @@ export default function Signup() {
 
     setLoading(true)
 
-    try {
-      const response = await fetch("https://lottery-management-system-backend.onrender.com/api/signup.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: name,
-          email: email,
-          phone: phone,
-          password: password,
-          confirm_password: confirmPassword,
-        }),
-      })
+   try {
+  const response = await fetch("https://lottery-management-system-backend.onrender.com/api/signup.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: name,
+      email: email,
+      phone: phone,
+      password: password,
+      confirm_password: confirmPassword,
+    }),
+  })
 
-      const data = await response.json()
+  const text = await response.text()
 
-      if (data.status === "success") {
-        // Pass the generated user_id down to the OTP page using route state mechanics
-        navigate("/OtpVerify", { state: { userId: data.user_id } })
-      } else {
-        setError(data.message || "Registration failed.")
-      }
-    } catch (err) {
-      setError("Unable to connect to the authentication server.")
-    } finally {
-      setLoading(false)
-    }
+  console.log("RAW RESPONSE:", text)
+
+  const data = JSON.parse(text)
+
+  if (data.status === "success") {
+    navigate("/OtpVerify", { state: { userId: data.user_id } })
+  } else {
+    setError(data.message || "Registration failed.")
   }
+
+} catch (err) {
+  console.error(err)
+  setError(err.message)
+} finally {
+  setLoading(false)
+}
 
   return (
     <div
