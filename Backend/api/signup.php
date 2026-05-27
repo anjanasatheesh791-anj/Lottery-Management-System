@@ -152,8 +152,7 @@ try {
 } catch(PDOException $e) {
 
     echo json_encode([
-        "status" => "error",
-        "message" => "Registration failed",
-        "error" => $e->getMessage()
-    ]);
+    "status" => "error",
+    "message" => $e->getMessage()
+]);
 }
