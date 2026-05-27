@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom"
 
 export default function OtpVerify() {
@@ -13,6 +14,36 @@ export default function OtpVerify() {
 
   // Pulls the hidden userId passed along from the Signup component redirect
   const userId = location.state?.userId
+
+useEffect(() => {
+  if (!userId) return; // safety guard
+
+  const generateOtp = async () => {
+    try {
+      const res = await fetch(
+        "https://lottery-management-system-backend.onrender.com/api/generateOtp.php",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_id: userId,
+          }),
+        }
+      );
+
+      const data = await res.json();
+      console.log("OTP GENERATED:", data);
+
+    } catch (err) {
+      console.error("OTP generation failed:", err);
+    }
+  };
+
+  generateOtp();
+}, []); // 🔥 IMPORTANT: empty dependency array
+
 
   // 3. Verification Event Handler Engine
   const handleVerify = async (e) => {
