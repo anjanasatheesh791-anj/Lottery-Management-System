@@ -3,7 +3,7 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin:*");
 header("Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Requested-With");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Max-Age: 86400");
@@ -120,33 +120,31 @@ $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 // ================= GENERATE OTP =================
 
-$otp = rand(100000, 999999);
+
 
 // ================= INSERT USER =================
 
 try {
 
     $stmt = $pdo->prepare("
-        INSERT INTO users 
-        (name, email, phone, password, otp, is_verified)
-        VALUES (?, ?, ?, ?, ?, 0)
-    ");
+    INSERT INTO users 
+    (name, email, phone, password)
+    VALUES (?, ?, ?, ?)
+");
 
-    $stmt->execute([
-        $name,
-        $email,
-        $phone,
-        $hashed_password,
-        $otp
-    ]);
-
+$stmt->execute([
+    $name,
+    $email,
+    $phone,
+    $hashed_password
+]);
     $user_id = $pdo->lastInsertId();
 
     echo json_encode([
         "status" => "success",
         "message" => "Signup successful",
         "user_id" => $user_id,
-        "otp" => $otp
+        
     ]);
 
 } catch(PDOException $e) {
