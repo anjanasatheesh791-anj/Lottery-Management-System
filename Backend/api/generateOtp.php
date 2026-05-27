@@ -32,21 +32,6 @@ try {
     exit();
 }
 
-try {
-    $pdo = new PDO(
-        "mysql:host=$host;dbname=$dbname;port=$port;charset=utf8mb4",
-        $user,
-        $password
-    );
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-} catch (Exception $e) {
-    echo json_encode([
-        "status" => "error",
-        "message" => "DB connection failed"
-    ]);
-    exit;
-}
 
 $data = json_decode(file_get_contents("php://input"), true);
 
