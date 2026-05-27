@@ -25,7 +25,9 @@ try {
     echo json_encode([
         "status" => "error",
         "message" => "DB connection failed",
-        "error" => $e->getMessage()
+        "debug_host" => $host,
+        "debug_db" => $dbname,
+        "debug_error" => $e->getMessage()
     ]);
     exit();
 }
