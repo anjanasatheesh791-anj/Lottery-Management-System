@@ -37,7 +37,7 @@ export default function AdminLogin() {
 
       // REDIRECT TO ADMIN DASHBOARD
 
-      navigate("/AdminDashboard", { replace: true });
+      navigate("/admin/dashboard", { replace: true });
 
     }
 
