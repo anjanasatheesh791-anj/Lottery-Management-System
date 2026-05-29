@@ -80,9 +80,9 @@ export default function AdminLayout() {
 
             {/* DASHBOARD */}
             <Link
-              to="/admin/AdminDashboard"
+              to="dashboard"
               className={
-                location.pathname === "/admin/AdminDashboard"
+                location.pathname === "/admin/dashboard"
                   ? activeLink
                   : normalLink
               }
@@ -92,9 +92,9 @@ export default function AdminLayout() {
 
             {/* POOLS */}
             <Link
-              to="/admin/CreateContest"
+              to="createcontest"
               className={
-                location.pathname === "/admin/CreateContest"
+                location.pathname === "/admin/createcontest"
                   ? activeLink
                   : normalLink
               }

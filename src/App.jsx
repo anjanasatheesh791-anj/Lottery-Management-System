@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
@@ -13,6 +14,7 @@ import CreatePool from "./Pages/CreatePool";
 import MyPools from "./Pages/Mypools";
 import Pools from "./Pages/Pools";
 
+//Admin Pages
 import AdminLayout from "./Pages/AdminLayout"; 
 import AdminDashboard from "./Pages/AdminDashboard"; 
 import CreateContest from "./Pages/CreateContest"; 
@@ -45,10 +47,6 @@ export default function App() {
 
         <Route path="/Dashboard" element={<Dashboard />} />
 
-        
-
-        <Route path="/AdminLogin" element={<AdminLogin />} />
-
         <Route path="/contest-details/:id" element={<ContestDetails/>}/>
 
         <Route path="/CreatePool" element={<CreatePool/>}/>
@@ -57,13 +55,19 @@ export default function App() {
 
         <Route path="/Pools" element={<Pools/>}/>
 
+        <Route path="/AdminLogin" element={<AdminLogin />} />
+
         <Route path="/admin" element={<AdminLayout/>}/>
         
-        <Route path="/admin/Admindashboard" element={<AdminDashboard/>}/>
+        <Route index element={<AdminDashboard />} />
 
-        <Route path="/admin/CreateContest" element={<CreateContest/>}/>
+        <Route path="dashboard" element={<AdminDashboard/>}/>
 
-        <Route path="/admin/generate-qr" element={<QrContest/>}/>
+        <Route path="createcontest" element={<CreateContest/>}/>
+
+        <Route path="generate-qr" element={<QrContest/>}/>
+      
+      <Route/>
 
       </Routes>
     </BrowserRouter>
