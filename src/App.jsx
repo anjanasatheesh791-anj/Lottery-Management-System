@@ -5,17 +5,23 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import ForgotPassword from "./Pages/ForgotPassword";
 import OtpVerify from "./Pages/Otpverify";
-import AdminDashboard from "./Pages/AdminDashboard";
-import CreateContest from "./Pages/CreateContest";
-import QrContest from "./Pages/qrcontest";
 import Dashboard from "./Pages/Dashboard";
 import Test from "./Pages/Test";
-import AdminLogin from "./Pages/AdminLogin";
 import JoinContest from "./Pages/JoinContest";
 import ContestDetails from "./Pages/Contestdetails";
 import CreatePool from "./Pages/CreatePool";
 import MyPools from "./Pages/Mypools";
 import Pools from "./Pages/Pools";
+
+import AdminLayout from "./Pages/AdminLayout"; 
+import AdminDashboard from "./Pages/AdminDashboard"; 
+import CreateContest from "./Pages/CreateContest"; 
+import QrContest from "./Pages/qrcontest"; 
+import AdminLogin from "./Pages/AdminLogin";
+
+
+
+
 
 export default function App() {
 
@@ -57,10 +63,15 @@ export default function App() {
 
         <Route path="/Pools" element={<Pools/>}/>
 
+        <Route path="/admin" element={<AdminLayout/>}/>
         
+        <Route path="dashboard" element={<AdminDashboard/>}/>
+
+        <Route path="create-contest" element={<CreateContest/>}/>
+
+        <Route path="generate-qr" element={<QrContest/>}/>
 
       </Routes>
-
     </BrowserRouter>
 
   );

@@ -80,9 +80,9 @@ export default function AdminLayout() {
 
             {/* DASHBOARD */}
             <Link
-              to="/AdminDashboard"
+              to="/admin/AdminDashboard"
               className={
-                location.pathname === "/AdminDashboard"
+                location.pathname === "/admin/AdminDashboard"
                   ? activeLink
                   : normalLink
               }
@@ -92,9 +92,9 @@ export default function AdminLayout() {
 
             {/* POOLS */}
             <Link
-              to="/CreateContest"
+              to="/admin/CreateContest"
               className={
-                location.pathname === "/CreateContest"
+                location.pathname === "/admin/CreateContest"
                   ? activeLink
                   : normalLink
               }
@@ -104,9 +104,9 @@ export default function AdminLayout() {
 
             {/* USERS */}
             <Link
-              to="/Users"
+              to="/admin/Users"
               className={
-                location.pathname === "/Users"
+                location.pathname === "/admin/Users"
                   ? activeLink
                   : normalLink
               }
@@ -116,9 +116,9 @@ export default function AdminLayout() {
 
             {/* TICKETS */}
             <Link
-              to="/Tickets"
+              to="/admin/Tickets"
               className={
-                location.pathname === "/Tickets"
+                location.pathname === "/admin/Tickets"
                   ? activeLink
                   : normalLink
               }
@@ -128,9 +128,9 @@ export default function AdminLayout() {
 
             {/* WINNERS */}
             <Link
-              to="/Winners"
+              to="/admin/Winners"
               className={
-                location.pathname === "/Winners"
+                location.pathname === "/admin/Winners"
                   ? activeLink
                   : normalLink
               }
@@ -140,9 +140,9 @@ export default function AdminLayout() {
 
             {/* QR */}
             <Link
-              to="/generate-qr"
+              to="/admin/generate-qr"
               className={
-                location.pathname === "/generate-qr"
+                location.pathname === "/admin/generate-qr"
                   ? activeLink
                   : normalLink
               }

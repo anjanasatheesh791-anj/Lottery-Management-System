@@ -1,36 +1,30 @@
 export default function AdminDashboard() {
 
   return (
-    <div>
+
+    <div className="min-h-screen bg-gray-950 text-white">
 
       {/* HEADER */}
-      <div className="flex justify-between items-center mb-10">
 
-        <div>
+      <div className="mb-10">
 
-          <h1 className="text-5xl font-bold text-purple-400">
-            Admin Dashboard
-          </h1>
+        <h1 className="text-5xl font-bold text-purple-400 mb-3">
+          Admin Dashboard
+        </h1>
 
-          <p className="text-gray-400 mt-2">
-            Manage contests, users, and lottery activities
-          </p>
-
-        </div>
-
-        <div className="bg-gray-900 border border-gray-800 px-5 py-3 rounded-2xl">
-          <p className="text-gray-300 font-semibold">
-            Admin Panel
-          </p>
-        </div>
+        <p className="text-gray-400 text-lg">
+          Manage contests, users, and lottery activities.
+        </p>
 
       </div>
 
       {/* STATS CARDS */}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
 
         {/* CARD 1 */}
-        <div className="bg-gray-900 border border-gray-800 p-8 rounded-3xl hover:-translate-y-2 duration-300">
+
+        <div className="bg-gray-900 border border-gray-800 rounded-3xl p-8 hover:-translate-y-2 duration-300">
 
           <div className="text-5xl mb-5">
             👥
@@ -47,30 +41,32 @@ export default function AdminDashboard() {
         </div>
 
         {/* CARD 2 */}
-        <div className="bg-gray-900 border border-gray-800 p-8 rounded-3xl hover:-translate-y-2 duration-300">
+
+        <div className="bg-gray-900 border border-gray-800 rounded-3xl p-8 hover:-translate-y-2 duration-300">
 
           <div className="text-5xl mb-5">
             🎯
           </div>
 
-          <h2 className="text-4xl font-bold text-teal-400">
+          <h2 className="text-4xl font-bold text-green-400">
             15
           </h2>
 
           <p className="text-gray-400 mt-3">
-            Active Pools
+            Active Contests
           </p>
 
         </div>
 
         {/* CARD 3 */}
-        <div className="bg-gray-900 border border-gray-800 p-8 rounded-3xl hover:-translate-y-2 duration-300">
+
+        <div className="bg-gray-900 border border-gray-800 rounded-3xl p-8 hover:-translate-y-2 duration-300">
 
           <div className="text-5xl mb-5">
             🎫
           </div>
 
-          <h2 className="text-4xl font-bold text-purple-400">
+          <h2 className="text-4xl font-bold text-blue-400">
             560
           </h2>
 
@@ -81,13 +77,14 @@ export default function AdminDashboard() {
         </div>
 
         {/* CARD 4 */}
-        <div className="bg-gray-900 border border-gray-800 p-8 rounded-3xl hover:-translate-y-2 duration-300">
+
+        <div className="bg-gray-900 border border-gray-800 rounded-3xl p-8 hover:-translate-y-2 duration-300">
 
           <div className="text-5xl mb-5">
             🏆
           </div>
 
-          <h2 className="text-4xl font-bold text-teal-400">
+          <h2 className="text-4xl font-bold text-yellow-400">
             8
           </h2>
 
@@ -100,6 +97,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* RECENT CONTESTS */}
+
       <div className="bg-gray-900 border border-gray-800 rounded-3xl p-8 mb-10">
 
         <div className="flex justify-between items-center mb-8">
@@ -197,15 +195,17 @@ export default function AdminDashboard() {
       </div>
 
       {/* RECENT WINNERS */}
+
       <div className="bg-gray-900 border border-gray-800 rounded-3xl p-8">
 
-        <h2 className="text-3xl font-bold text-teal-400 mb-8">
+        <h2 className="text-3xl font-bold text-purple-400 mb-8">
           Recent Winners
         </h2>
 
         <div className="space-y-5">
 
-          {/* WINNER 1 */}
+          {/* WINNER */}
+
           <div className="bg-gray-950 border border-gray-800 rounded-2xl p-5 flex justify-between items-center">
 
             <div>
@@ -226,31 +226,13 @@ export default function AdminDashboard() {
 
           </div>
 
-          {/* WINNER 2 */}
-          <div className="bg-gray-950 border border-gray-800 rounded-2xl p-5 flex justify-between items-center">
-
-            <div>
-
-              <h3 className="text-xl font-semibold">
-                Anjali Nair
-              </h3>
-
-              <p className="text-gray-400 mt-1">
-                Lucky Draw Winner
-              </p>
-
-            </div>
-
-            <div className="text-green-400 text-xl font-bold">
-              ₹5,000
-            </div>
-
-          </div>
-
         </div>
 
       </div>
 
     </div>
+
   );
+
 }
+
