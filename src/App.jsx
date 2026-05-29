@@ -41,17 +41,11 @@ export default function App() {
 
         <Route path="/otpVerify" element={<OtpVerify />} />
 
-        <Route path="/AdminDashboard" element={<AdminDashboard />} />
-
-        <Route path="/CreateContest" element={<CreateContest />} />
-
-        <Route path="/generate-qr" element={<QrContest />} />
-
         <Route path="/join-contest/:id" element={<JoinContest />} />
 
         <Route path="/Dashboard" element={<Dashboard />} />
 
-        <Route path="/Test" element={<Test />} />
+        
 
         <Route path="/AdminLogin" element={<AdminLogin />} />
 
