@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
@@ -20,10 +19,6 @@ import AdminDashboard from "./Pages/AdminDashboard";
 import CreateContest from "./Pages/CreateContest"; 
 import QrContest from "./Pages/qrcontest"; 
 import AdminLogin from "./Pages/AdminLogin";
-
-
-
-
 
 export default function App() {
 
@@ -57,7 +52,7 @@ export default function App() {
 
         <Route path="/AdminLogin" element={<AdminLogin />} />
 
-        <Route path="/admin" element={<AdminLayout/>}/>
+        <Route path="/admin" element={<AdminLayout/>}>
         
         <Route index element={<AdminDashboard />} />
 
@@ -67,7 +62,7 @@ export default function App() {
 
         <Route path="generate-qr" element={<QrContest/>}/>
       
-      <Route/>
+      </Route>
 
       </Routes>
     </BrowserRouter>
