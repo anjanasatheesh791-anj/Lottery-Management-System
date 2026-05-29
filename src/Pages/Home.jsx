@@ -51,7 +51,7 @@ Contact
 
 <div className="flex gap-4">
 
-  <Link to="/AdminDashboard">
+  <Link to="/AdminLogin">
 
     <button className="bg-teal-400 text-black px-5 py-2 rounded-lg font-semibold">
       Admin
