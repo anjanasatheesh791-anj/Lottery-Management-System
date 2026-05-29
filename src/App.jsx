@@ -65,11 +65,11 @@ export default function App() {
 
         <Route path="/admin" element={<AdminLayout/>}/>
         
-        <Route path="dashboard" element={<AdminDashboard/>}/>
+        <Route path="/admin/Admindashboard" element={<AdminDashboard/>}/>
 
-        <Route path="create-contest" element={<CreateContest/>}/>
+        <Route path="/admin/CreateContest" element={<CreateContest/>}/>
 
-        <Route path="generate-qr" element={<QrContest/>}/>
+        <Route path="/admin/generate-qr" element={<QrContest/>}/>
 
       </Routes>
     </BrowserRouter>
