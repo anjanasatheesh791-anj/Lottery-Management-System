@@ -12,6 +12,7 @@ import ContestDetails from "./Pages/Contestdetails";
 import CreatePool from "./Pages/CreatePool";
 import MyPools from "./Pages/Mypools";
 import Pools from "./Pages/Pools";
+import PoolStatus from "./Pages/PoolStatus";
 
 //Admin Pages
 import AdminLayout from "./Pages/AdminLayout"; 
@@ -49,6 +50,8 @@ export default function App() {
         <Route path="/MyPools" element={<MyPools/>}/>
 
         <Route path="/Pools" element={<Pools/>}/>
+
+        <Route path="/PoolStatus" element={<PoolStatus/>}/>
 
         <Route path="/AdminLogin" element={<AdminLogin />} />
 
