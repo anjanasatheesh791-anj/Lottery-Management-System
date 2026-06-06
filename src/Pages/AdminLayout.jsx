@@ -150,6 +150,16 @@ export default function AdminLayout() {
               📷 Generate QR
             </Link>
 
+           <Link to="spin"
+           className={
+           location.pathname === "/admin/spin"
+           ? activeLink
+           : normalLink
+          }
+          >
+          🎡 Spin Arena
+          </Link>
+
           </div>
         </div>
 

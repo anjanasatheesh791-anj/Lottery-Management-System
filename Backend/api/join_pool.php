@@ -18,7 +18,6 @@ if (!$user_id || !$pool_id || !$pool_source) {
 }
 
 // Map the pool source to your exact database tables
-// Map the pool source to your exact database tables
 if ($pool_source === 'admin') {
     $table = "contests";
     $fee_col = "entry_fee";
@@ -93,39 +92,29 @@ try {
 
     $extra_msg = "";
 
-    // D. INSTANT LOTTERY ENGINE TRIGGER (Runs right on the HTTP request if slots are full!)
-    if ($new_filled_slots == $pool['total_slots']) {
-        
-        // Fetch everyone who joined this specific pool
-        $players_stmt = $conn->prepare("SELECT user_id FROM joined_pools WHERE pool_id = ? AND pool_source = ?");
-        $players_stmt->bind_param("is", $pool_id, $pool_source);
-        $players_stmt->execute();
-        $players_res = $players_stmt->get_result();
-        
-        $participants = [];
-        while ($p_row = $players_res->fetch_assoc()) {
-            $participants[] = $p_row['user_id'];
-        }
+   // WHEN POOL FILLS
 
-        if (count($participants) > 0) {
-            // Pick a completely random winner using cryptographically secure random_int
-            $winning_index = random_int(0, count($participants) - 1);
-            $winner_id = $participants[$winning_index];
+if ($new_filled_slots == $pool['total_slots']) {
 
-            // Close the contest and update winner_id (Ensure your tables have a winner_id column)
-            $close_stmt = $conn->prepare("UPDATE $table SET status = ?, winner_id = ? WHERE id = ?");
-            $close_stmt->bind_param("sii", $status_closed_val, $winner_id, $pool_id);
-            $close_stmt->execute();
+    $completed_status = "completed";
 
-            // Payout prize amount directly to the winner's wallet
-            $payout_stmt = $conn->prepare("UPDATE wallets SET balance = balance + ? WHERE user_id = ?");
-            $payout_stmt->bind_param("di", $pool['prize_pool'], $winner_id);
-            $payout_stmt->execute();
+    $filled_stmt = $conn->prepare(
+        "UPDATE $table
+        SET status = ?
+        WHERE id = ?"
+    );
 
-            $extra_msg = " Pool filled! The draw took place instantly.";
-        }
-    }
+    $filled_stmt->bind_param(
+        "si",
+        $completed_status,
+        $pool_id
+    );
 
+    $filled_stmt->execute();
+
+    $extra_msg =
+        " Pool filled and ready for draw.";
+}
     $conn->commit();
     echo json_encode(["status" => "success", "message" => "Successfully joined pool!" . $extra_msg]);
 

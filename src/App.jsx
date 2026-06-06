@@ -51,7 +51,7 @@ export default function App() {
 
         <Route path="/Pools" element={<Pools/>}/>
 
-        <Route path="/PoolStatus" element={<PoolStatus/>}/>
+        <Route path="/PoolStatus/:id" element={<PoolStatus/>}/>
 
         <Route path="/AdminLogin" element={<AdminLogin />} />
 
@@ -64,6 +64,8 @@ export default function App() {
         <Route path="createcontest" element={<CreateContest/>}/>
 
         <Route path="generate-qr" element={<QrContest/>}/>
+
+        <Route path="spin" element={<SpinPage />} />
       
       </Route>
 
