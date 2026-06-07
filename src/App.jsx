@@ -14,12 +14,14 @@ import MyPools from "./Pages/Mypools";
 import Pools from "./Pages/Pools";
 import PoolStatus from "./Pages/PoolStatus";
 
+
 //Admin Pages
 import AdminLayout from "./Pages/AdminLayout"; 
 import AdminDashboard from "./Pages/AdminDashboard"; 
 import CreateContest from "./Pages/CreateContest"; 
 import QrContest from "./Pages/qrcontest"; 
 import AdminLogin from "./Pages/AdminLogin";
+import SpinPage from "./Pages/SpinPage";
 
 export default function App() {
 
