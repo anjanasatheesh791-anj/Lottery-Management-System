@@ -20,7 +20,7 @@ if (!$contest_id) {
 $stmt = $conn->prepare("
     SELECT
         u.id,
-        u.username
+        u.name
     FROM joined_pools jp
     INNER JOIN users u
         ON jp.user_id = u.id
