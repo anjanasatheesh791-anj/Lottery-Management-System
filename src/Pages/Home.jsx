@@ -105,9 +105,11 @@ Experience exciting lottery spins, instant rewards, and luckywinning moments all
   </button>
 </Link>
 
-<button className="border border-teal-400 px-7 py-3 rounded-xl text-lg hover:bg-teal-400 hover:text-black duration-300">
-View Prizes
-</button>
+<Link to="/prizes">
+  <button className="border border-teal-400 px-7 py-3 rounded-xl text-lg hover:bg-teal-400 hover:text-black duration-300">
+    View Prizes
+  </button>
+</Link>
 
 </div>
 
