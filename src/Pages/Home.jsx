@@ -99,9 +99,11 @@ Experience exciting lottery spins, instant rewards, and luckywinning moments all
 {/* BUTTONS */}
 <div className="flex gap-5 mb-10">
 
-<button className="bg-purple-500 text-black px-7 py-3 rounded-xl text-lg font-semibold hover:bg-purple-400 duration-300">
-Start Spinning
-</button>
+<Link to="/winners">
+  <button className="bg-purple-500 text-black px-7 py-3 rounded-xl text-lg font-semibold hover:bg-purple-400 duration-300">
+    View Winners
+  </button>
+</Link>
 
 <button className="border border-teal-400 px-7 py-3 rounded-xl text-lg hover:bg-teal-400 hover:text-black duration-300">
 View Prizes

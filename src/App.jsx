@@ -13,6 +13,7 @@ import CreatePool from "./Pages/CreatePool";
 import MyPools from "./Pages/Mypools";
 import Pools from "./Pages/Pools";
 import PoolStatus from "./Pages/PoolStatus";
+import Winners from "./Pages/Winner";
 
 
 //Admin Pages
@@ -36,6 +37,8 @@ export default function App() {
         <Route path="/Login" element={<Login />} />
 
         <Route path="/signup" element={<Signup />} />
+
+        <Route path="/winners" element={<Winners/>}/>
 
         <Route path="/forgotpassword" element={<ForgotPassword />} />
 
