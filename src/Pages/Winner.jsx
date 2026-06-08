@@ -17,7 +17,7 @@ export default function Winners() {
     try {
 
       const res = await axios.get(
-        "https://lottery-management-system-backend.onrender.com/api/get_winners.php"
+        "https://lottery-management-system-backend.onrender.com/api/get_winner.php"
       );
 
       if(res.data.success){
