@@ -30,12 +30,12 @@ Why SpinVault
 </li>
 
 <li>
-<a
-href="#winners"
-className="hover:text-teal-400 cursor-pointer duration-300"
->
-Winners
-</a>
+  <a
+    href="#faq"
+    className="hover:text-teal-400 cursor-pointer duration-300"
+  >
+    FAQ
+  </a>
 </li>
 
 <li>
@@ -257,97 +257,8 @@ Safe user accounts and secure online transactions.
 </section>
 
 
-{/* WINNERS SECTION */}
-<section id="winners" className="px-8 pb-20">
-
-<div className="text-center mb-14">
-
-<h2 className="text-4xl font-bold mb-4">
-Recent <span className="text-purple-400">Winners</span>
-</h2>
-
-<p className="text-gray-400 text-lg">
-Congratulations to our lucky players.
-</p>
-
-</div>
-
-
-<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-{/* WINNER 1 */}
-<div className="bg-gray-900 p-8 rounded-2xl border border-gray-800 text-center hover:-translate-y-2 duration-300">
-
-<div className="w-24 h-24 bg-purple-500/20 rounded-full flex items-center justify-center text-3xl font-bold text-purple-400 mx-auto mb-5">
-A
-</div>
-
-<h3 className="text-2xl font-bold mb-3">
-Arjun Nair
-</h3>
-
-<p className="text-gray-400 mb-2">
-Won Prize
-</p>
-
-<h2 className="text-3xl font-bold text-teal-400">
-₹15,000
-</h2>
-
-</div>
-
-
-{/* WINNER 2 */}
-<div className="bg-gray-900 p-8 rounded-2xl border border-gray-800 text-center hover:-translate-y-2 duration-300">
-
-<div className="w-24 h-24 bg-teal-500/20 rounded-full flex items-center justify-center text-3xl font-bold text-teal-400 mx-auto mb-5">
-S
-</div>
-
-<h3 className="text-2xl font-bold mb-3">
-Sneha Joseph
-</h3>
-
-<p className="text-gray-400 mb-2">
-Won Prize
-</p>
-
-<h2 className="text-3xl font-bold text-purple-400">
-₹25,000
-</h2>
-
-</div>
-
-
-{/* WINNER 3 */}
-<div className="bg-gray-900 p-8 rounded-2xl border border-gray-800 text-center hover:-translate-y-2 duration-300">
-
-<div className="w-24 h-24 bg-purple-500/20 rounded-full flex items-center justify-center text-3xl font-bold text-purple-400 mx-auto mb-5">
-R
-</div>
-
-<h3 className="text-2xl font-bold mb-3">
-Rahul Menon
-</h3>
-
-<p className="text-gray-400 mb-2">
-Won Prize
-</p>
-
-<h2 className="text-3xl font-bold text-teal-400">
-₹50,000
-</h2>
-
-</div>
-
-</div>
-
-</section>
-
-
-
 {/* FAQ SECTION */}
-<section className="px-8 pb-20">
+<section id="faq" className="px-8 pb-20">
 
   <div className="text-center mb-14">
 
