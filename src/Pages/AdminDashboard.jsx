@@ -76,7 +76,7 @@ export default function AdminDashboard() {
           </div>
 
           <h2 className="text-4xl font-bold text-green-400">
-            15
+          {activeContests}
           </h2>
 
           <p className="text-gray-400 mt-3">
