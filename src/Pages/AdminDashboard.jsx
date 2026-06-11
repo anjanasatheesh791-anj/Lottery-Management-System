@@ -1,4 +1,31 @@
+import { useState, useEffect } from "react";
 export default function AdminDashboard() {
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [activeContests, setActiveContests] = useState(0);
+
+  useEffect(() => {
+
+    fetch("https://lottery-management-system-backend.onrender.com/api/get_total_users.php")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setTotalUsers(data.total_users);
+        }
+      })
+      .catch((err) => console.error(err));
+
+
+       fetch("https://lottery-management-system-backend.onrender.com/api/get_active_contests.php")
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.success) {
+        setActiveContests(data.active_contests);
+      }
+    })
+    .catch((err) => console.error(err));
+
+  }, 
+  []);
 
   return (
 
@@ -31,7 +58,7 @@ export default function AdminDashboard() {
           </div>
 
           <h2 className="text-4xl font-bold text-purple-400">
-            120
+            {totalUsers}
           </h2>
 
           <p className="text-gray-400 mt-3">
