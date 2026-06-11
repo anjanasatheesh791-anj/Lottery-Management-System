@@ -12,7 +12,6 @@ fetchUsers();
 
 const fetchUsers = async () => {
 
-```
 try {
 
   const response = await axios.get(
@@ -32,7 +31,7 @@ try {
   setLoading(false);
 
 }
-```
+
 
 };
 
@@ -60,7 +59,7 @@ Loading Users... </h1> </div>
 
 return (
 
-```
+
 <div className="min-h-screen bg-gray-950 text-white">
 
   {/* HEADER */}
@@ -204,7 +203,6 @@ return (
   </div>
 
 </div>
-```
 
 );
 
