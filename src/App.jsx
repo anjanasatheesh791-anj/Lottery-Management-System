@@ -24,6 +24,7 @@ import CreateContest from "./Pages/CreateContest";
 import QrContest from "./Pages/qrcontest"; 
 import AdminLogin from "./Pages/AdminLogin";
 import SpinPage from "./Pages/SpinPage";
+import Users from "./Pages/Users";
 
 export default function App() {
 
@@ -70,6 +71,8 @@ export default function App() {
         <Route path="dashboard" element={<AdminDashboard/>}/>
 
         <Route path="createcontest" element={<CreateContest/>}/>
+
+        <Route path="users" element={<Users/>}/>
 
         <Route path="generate-qr" element={<QrContest/>}/>
 

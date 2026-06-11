@@ -104,9 +104,9 @@ export default function AdminLayout() {
 
             {/* USERS */}
             <Link
-              to="/admin/Users"
+              to="users"
               className={
-                location.pathname === "/admin/Users"
+                location.pathname === "/admin/users"
                   ? activeLink
                   : normalLink
               }
