@@ -15,7 +15,7 @@ export default function AdminDashboard() {
       .catch((err) => console.error(err));
 
 
-       fetch("https://lottery-management-system-backend.onrender.com/api/get_active_contests.php")
+       fetch("https://lottery-management-system-backend.onrender.com/api/get_tot_contests.php")
     .then((res) => res.json())
     .then((data) => {
       if (data.success) {
