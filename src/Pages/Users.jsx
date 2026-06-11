@@ -154,7 +154,7 @@ return (
                     onClick={() =>
                       handleCreatePoolRestriction(user)
                     }
-                    className="bg-blue-500 hover:bg-blue-400 text-black px-3 py-2 rounded-xl text-sm font-semibold"
+                    className="bg-gray-950 border border-gray-700 text-purple-400 hover:border-purple-500 hover:text-purple-300 px-3 py-2 rounded-xl text-sm font-semibold duration-300"
                   >
                     Restrict Create
                   </button>
@@ -163,7 +163,7 @@ return (
                     onClick={() =>
                       handleJoinPoolRestriction(user)
                     }
-                    className="bg-yellow-500 hover:bg-yellow-400 text-black px-3 py-2 rounded-xl text-sm font-semibold"
+                    className="bg-gray-950 border border-gray-700 text-purple-400 hover:border-purple-500 hover:text-purple-300 px-3 py-2 rounded-xl text-sm font-semibold duration-300"
                   >
                     Restrict Join
                   </button>
@@ -172,7 +172,7 @@ return (
                     onClick={() =>
                       handleBlockUser(user)
                     }
-                    className="bg-red-500 hover:bg-red-400 text-black px-3 py-2 rounded-xl text-sm font-semibold"
+                   className="bg-gray-950 border border-gray-700 text-purple-400 hover:border-purple-500 hover:text-purple-300 px-3 py-2 rounded-xl text-sm font-semibold duration-300"
                   >
                     Block
                   </button>
@@ -181,7 +181,7 @@ return (
                     onClick={() =>
                       handleDeleteUser(user)
                     }
-                    className="bg-gray-700 hover:bg-gray-600 px-3 py-2 rounded-xl text-sm font-semibold"
+                    className="bg-gray-950 border border-gray-700 text-purple-400 hover:border-purple-500 hover:text-purple-300 px-3 py-2 rounded-xl text-sm font-semibold duration-300"
                   >
                     Delete
                   </button>
