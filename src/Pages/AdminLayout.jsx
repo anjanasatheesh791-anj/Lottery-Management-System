@@ -114,28 +114,17 @@ export default function AdminLayout() {
               👥 Users
             </Link>
 
-            {/* TICKETS */}
+            
+            {/* REVENUE */}
             <Link
-              to="/admin/Tickets"
+              to="/admin/Revenue"
               className={
-                location.pathname === "/admin/Tickets"
+                location.pathname === "/admin/Revenue"
                   ? activeLink
                   : normalLink
               }
             >
-              🎫 Tickets
-            </Link>
-
-            {/* WINNERS */}
-            <Link
-              to="/admin/Winners"
-              className={
-                location.pathname === "/admin/Winners"
-                  ? activeLink
-                  : normalLink
-              }
-            >
-              🏆 Winners
+              🏆 Revenue
             </Link>
 
             {/* QR */}

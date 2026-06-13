@@ -1,15 +1,49 @@
 import axios from "axios";
 import { useState } from "react";
+import { useEffect } from "react";
 
 
 export default function CreateContest() {
 
   const [contestName, setContestName] = useState("");
-  const [prize, setPrize] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [maxPlayers, setMaxPlayers] = useState("");
-  
+ const [entryAmount, setEntryAmount] = useState(10);
+const [winnerCount, setWinnerCount] = useState(1);
+
+const [summary, setSummary] = useState({
+  totalCollected: 0,
+  adminCommission: 0,
+  prizePool: 0,
+  amountPerWinner: 0,
+});
+
+
+useEffect(() => {
+
+  const collected =
+    Number(entryAmount) * Number(maxPlayers);
+
+  const commission =
+    collected * 0.10;
+
+  const prizePool =
+    collected - commission;
+
+  const amountPerWinner =
+    winnerCount > 0
+      ? prizePool / winnerCount
+      : 0;
+
+  setSummary({
+    totalCollected: collected,
+    adminCommission: commission,
+    prizePool,
+    amountPerWinner
+  });
+
+}, [entryAmount, maxPlayers, winnerCount]);
 
   // CREATE CONTEST FUNCTION
   const handleSubmit = async (e) => {
@@ -19,11 +53,16 @@ export default function CreateContest() {
     try {
 
       const payload = {
-        title: contestName,
-        prize_amount: prize,
-        contest_datetime: `${date} ${time}:00`,
-        max_players: maxPlayers
-      };
+  title: contestName,
+  entry_amount: entryAmount,
+  winner_count: winnerCount,
+  contest_datetime: `${date} ${time}:00`,
+  max_players: maxPlayers,
+
+  total_collected: summary.totalCollected,
+  admin_commission: summary.adminCommission,
+  prize_pool: summary.prizePool
+};
 
       const response = await axios.post(
         "https://lottery-management-system-backend.onrender.com/api/create_contest.php",
@@ -37,10 +76,11 @@ export default function CreateContest() {
       if (response.data.success) {
 
         setContestName("");
-        setPrize("");
         setDate("");
         setTime("");
         setMaxPlayers("");
+        setEntryAmount(10);
+        setWinnerCount(1);
 
       }
 
@@ -96,24 +136,23 @@ export default function CreateContest() {
             />
 
           </div>
-
-          {/* PRIZE */}
-          <div className="mb-6">
+         
+        <div className="mb-6">
 
             <label className="block text-lg mb-3 text-gray-300">
-              Prize Amount
+              Entry Amount
             </label>
-
-            <input
-              type="number"
-              placeholder="Enter prize amount"
-              className="w-full px-5 py-3 rounded-xl bg-gray-950 border border-gray-700 text-white outline-none"
-              value={prize}
-              onChange={(e) => setPrize(e.target.value)}
-              required
-            />
+          <input
+  type="number"
+  value={entryAmount}
+  onChange={(e) => setEntryAmount(e.target.value)}
+  className="w-full px-5 py-3 rounded-xl bg-gray-950 border border-gray-700 text-white outline-none"
+  required
+/>
 
           </div>
+
+
 
           {/* DATE */}
           <div className="mb-6">
@@ -166,6 +205,70 @@ export default function CreateContest() {
             />
 
           </div>
+
+        <div className="mb-8">
+
+  <label className="block text-lg mb-3 text-gray-300">
+    Winner Count
+  </label>
+
+  <input
+    type="number"
+    value={winnerCount}
+    min="1"
+    max={maxPlayers || 1}
+   onChange={(e) =>
+  setWinnerCount(
+    Math.max(
+      1,
+      Math.min(
+        Number(maxPlayers || 1),
+        Number(e.target.value)
+      )
+    )
+  )
+}
+    className="w-full px-5 py-3 rounded-xl bg-gray-950 border border-gray-700 text-white outline-none"
+    required
+  />
+
+</div>
+
+<div className="bg-gray-950 border border-purple-700 rounded-xl p-5 mb-6">
+
+  <h3 className="text-xl font-bold text-purple-400 mb-4">
+    Contest Financial Summary
+  </h3>
+
+  <div className="space-y-3">
+
+    <div className="flex justify-between">
+      <span>Total Collection</span>
+      <span>₹{summary.totalCollected}</span>
+    </div>
+
+    <div className="flex justify-between">
+      <span>Platform Fee (10%)</span>
+      <span>₹{summary.adminCommission}</span>
+    </div>
+
+    <div className="flex justify-between">
+      <span>Prize Pool</span>
+      <span>₹{summary.prizePool}</span>
+    </div>
+
+    <div className="flex justify-between">
+      <span>Amount Per Winner</span>
+      <span>
+        ₹{summary.amountPerWinner.toFixed(2)}
+      </span>
+    </div>
+
+  </div>
+
+</div>
+
+
 
           {/* BUTTON */}
           <button
