@@ -68,8 +68,8 @@ useEffect(() => {
         "https://lottery-management-system-backend.onrender.com/api/create_contest.php",
         payload
       );
-
-      alert(response.data.message);
+console.log(response.data);
+alert(JSON.stringify(response.data));
       
 
       // CLEAR FORM AFTER SUCCESS
