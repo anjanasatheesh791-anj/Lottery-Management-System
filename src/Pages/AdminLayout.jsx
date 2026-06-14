@@ -117,14 +117,14 @@ export default function AdminLayout() {
             
             {/* REVENUE */}
             <Link
-              to="/admin/Revenue"
+              to="/admin/revenue"
               className={
-                location.pathname === "/admin/Revenue"
+                location.pathname === "/admin/revenue"
                   ? activeLink
                   : normalLink
               }
             >
-              🏆 Revenue
+              💰 Revenue
             </Link>
 
             {/* QR */}

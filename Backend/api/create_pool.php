@@ -44,6 +44,8 @@ $visibility   = $conn->real_escape_string($data['visibility']);
 $description  = isset($data['description']) ? $conn->real_escape_string($data['description']) : '';
 $expiry_hours = intval($data['expiry_hours']);
 $prize_pool   = floatval($data['prize_pool']);
+$total_collected = floatval($data['total_collected']);
+$admin_commission = floatval($data['admin_commission']);
 
 // 6. CRYPTOGRAPHIC INVITE CODE GENERATOR 
 function generateUniqueCode($conn) {
@@ -74,9 +76,23 @@ $invite_code = generateUniqueCode($conn);
 $expiry_time = date('Y-m-d H:i:s', strtotime("+$expiry_hours hours"));
 
 // 8. COMPILE PREPARED STATEMENT SAFELY
-$sql = "INSERT INTO usercreated_pools 
-        (creator_id, pool_name, pool_type, total_slots, entry_amount, winner_count, visibility, description, expiry_time, prize_pool, invite_code, status) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Open')";
+$sql = "INSERT INTO usercreated_pools
+(
+creator_id,
+pool_name,
+pool_type,
+total_slots,
+entry_amount,
+winner_count,
+visibility,
+description,
+expiry_time,
+total_collected,
+admin_commission,
+prize_pool,
+invite_code,
+status
+)";
 
 $stmt = $conn->prepare($sql);
 
@@ -87,7 +103,7 @@ if (!$stmt) {
 
 // Bind our sanitized variables securely to the data-markers
 $stmt->bind_param(
-    "issidisssds", 
+    "issidisssddds", 
     $creator_id, 
     $pool_name, 
     $pool_type, 
@@ -97,7 +113,9 @@ $stmt->bind_param(
     $visibility, 
     $description, 
     $expiry_time, 
-    $prize_pool, 
+    $total_collected,    
+    $admin_commission, 
+    $prize_pool,   
     $invite_code
 );
 

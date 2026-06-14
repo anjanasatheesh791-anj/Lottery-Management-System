@@ -85,10 +85,33 @@ try {
     $join_stmt->execute();
 
     // C. Increment filled_slots count
-    $new_filled_slots = $pool['filled_slots'] + 1;
-    $update_pool_stmt = $conn->prepare("UPDATE $table SET filled_slots = ? WHERE id = ?");
-    $update_pool_stmt->bind_param("ii", $new_filled_slots, $pool_id);
-    $update_pool_stmt->execute();
+  $new_filled_slots = $pool['filled_slots'] + 1;
+
+$total_collected = $new_filled_slots * $pool['entry_amount'];
+
+$admin_commission = $total_collected * 0.10;
+
+$prize_pool = $total_collected - $admin_commission;
+
+$update_pool_stmt = $conn->prepare(
+    "UPDATE $table
+     SET filled_slots = ?,
+         total_collected = ?,
+         admin_commission = ?,
+         prize_pool = ?
+     WHERE id = ?"
+);
+
+$update_pool_stmt->bind_param(
+    "idddi",
+    $new_filled_slots,
+    $total_collected,
+    $admin_commission,
+    $prize_pool,
+    $pool_id
+);
+
+$update_pool_stmt->execute();
 
     $extra_msg = "";
 
@@ -96,7 +119,7 @@ try {
 
 if ($new_filled_slots == $pool['total_slots']) {
 
-    $completed_status = "completed";
+    $completed_status = $status_closed_val;
 
     $filled_stmt = $conn->prepare(
         "UPDATE $table

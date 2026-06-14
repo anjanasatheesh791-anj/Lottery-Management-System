@@ -72,18 +72,21 @@ export default function CreatePool() {
 
     //console.log({poolName,visibility}); -> To check the form data submission
 
-    const payload = {
-      creator_id: userId,
-      pool_name: poolName,
-      pool_type: poolType,
-      total_slots: totalSlots,
-      entry_amount: entryAmt,
-      winner_count: winnerCount,
-      visibility: visibility,
-      description: description,
-      expiry_hours: expiryHours,
-      prize_pool: summary.totalPrizePool,
-    };
+   const payload = {
+  creator_id: userId,
+  pool_name: poolName,
+  pool_type: poolType,
+  total_slots: totalSlots,
+  entry_amount: entryAmt,
+  winner_count: winnerCount,
+  visibility: visibility,
+  description: description,
+  expiry_hours: expiryHours,
+
+  total_collected: summary.totalCollected,
+  admin_commission: summary.adminCommission,
+  prize_pool: summary.totalPrizePool,
+};
 
     fetch("https://lottery-management-system-backend.onrender.com/api/create_pool.php", {
       method: "POST",
