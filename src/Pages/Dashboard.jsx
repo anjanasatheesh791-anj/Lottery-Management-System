@@ -25,6 +25,7 @@ import CreatePool from "./CreatePool";
 import MyPools from "./Mypools";
 import Pools from "./Pools";
 import JoinedPools from "./JoinedPools"; 
+import Wallet from "./Wallet";
 
 export default function Dashboard() {
   const [wallet, setWallet] = useState(0);
@@ -128,7 +129,16 @@ export default function Dashboard() {
           >
             <FaUsers /> Joined Pools
           </button>
-          <button className="flex items-center gap-4 hover:bg-gray-800 duration-300 px-5 py-4 rounded-2xl w-full text-left text-gray-400 hover:text-white">
+
+          <button 
+          onClick={() => setActiveTab("Wallet")}
+            className={`flex  items-center gap-4 px-5 py-4 rounded-2xl w-full text-left font-semibold transition duration-200 ${
+              activeTab === "Wallet" 
+                ? "bg-purple-500 text-black" 
+                : "text-gray-400 hover:bg-gray-800 hover:text-white"
+            }`}
+          
+          >
             <FaWallet /> Wallet
           </button>
         
@@ -165,7 +175,7 @@ export default function Dashboard() {
           <CreatePool />
         ) : activeTab === "myPools"? (<MyPools/>) : activeTab === "Pools"?(<Pools/>): activeTab === "JoinedPools"?<div className="w-full min-h-[70vh] flex items-center justify-center p-4">
     <JoinedPools />
-  </div>: (
+  </div>: activeTab === "Wallet"? (<Wallet/>): (
           /* STANDARD DEFAULT DASHBOARD VIEWS */
           <>
             {/* TOP HEADER */}
