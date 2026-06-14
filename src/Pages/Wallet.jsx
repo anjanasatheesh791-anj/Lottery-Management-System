@@ -14,12 +14,12 @@ export default function Wallet() {
 
   useEffect(() => {
     fetch(
-      `https://your-backend-url/api/get_wallet.php?user_id=${userId}`
+      `https://lottery-management-system-backend.onrender.com/api/get_wallet.php?user_id=${userId}`
     )
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "success") {
-          setWallet(data.wallet);
+          setWallet(data.wallet.balance);
         }
       })
       .catch(console.error)
