@@ -14,12 +14,13 @@ $allPools = [];
 
 
 $adminQuery = "
-SELECT 
+SELECT
     id,
     title AS pool_name,
-    entry_fee AS entry_amount,
+    entry_amount,
+    prize_pool,
     max_players,
-    NULL AS winner_count,
+    winner_count,
     filled_slots,
     'Public' AS visibility,
     'admin' AS pool_source
@@ -38,14 +39,15 @@ if ($adminResult && $adminResult->num_rows > 0) {
 
         // Store inside common array
         $allPools[] = [
-            "id" => $row['id'],
-            "pool_name" => $row['pool_name'],
-            "entry_amount" => $row['entry_amount'],
-            "total_slots" => $row['max_players'],
-            "filled_slots"=> $row['filled_slots'],
-            "winner_count" => $row['winner_count'],
-            "visibility" => $row['visibility'],
-            "pool_source" => $row['pool_source']
+    "id" => $row['id'],
+    "pool_name" => $row['pool_name'],
+    "entry_amount" => $row['entry_amount'],
+    "prize_pool" => $row['prize_pool'],
+    "total_slots" => $row['max_players'],
+    "filled_slots" => $row['filled_slots'],
+    "winner_count" => $row['winner_count'],
+    "visibility" => $row['visibility'],
+    "pool_source" => $row['pool_source']
         ];
     }
 }

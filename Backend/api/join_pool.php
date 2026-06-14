@@ -20,8 +20,8 @@ if (!$user_id || !$pool_id || !$pool_source) {
 // Map the pool source to your exact database tables
 if ($pool_source === 'admin') {
     $table = "contests";
-    $fee_col = "entry_fee";
-    $prize_col = "prize_amount";
+    $fee_col = "entry_amount";
+    $prize_col = "prize_pool";
     $slots_col = "max_players";
     $status_active_val = "active";
     $status_closed_val = "completed"; // 🌟 Matches your Admin ENUM

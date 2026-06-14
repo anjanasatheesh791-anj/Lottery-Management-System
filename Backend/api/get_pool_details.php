@@ -19,7 +19,7 @@ try {
     $table = ($pool_source === 'admin') ? 'contests' : 'usercreated_pools';
     $title_col = ($pool_source === 'admin') ? 'title' : 'pool_name';
     $fee_col = ($pool_source === 'admin') ? 'entry_fee' : 'entry_amount';
-    $prize_col = ($pool_source === 'admin') ? 'prize_amount' : 'prize_pool';
+    $prize_col = ($pool_source === 'admin') ? 'prize_pool' : 'prize_pool';
     $slots_col = ($pool_source === 'admin') ? 'max_players' : 'total_slots';
     
     // 🌟 DYNAMIC VISIBILITY HANDLING
