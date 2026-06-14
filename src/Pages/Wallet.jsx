@@ -15,12 +15,16 @@ export default function Wallet() {
 
   useEffect(() => {
     fetch(
-      `https://lottery-management-system-backend.onrender.com/api/get_wallet.php?id=${userId}`
+      `https://lottery-management-system-backend.onrender.com/api/get_wallet_details.php?id=${userId}`
     )
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "success") {
-          setWallet(data.wallet.balance);
+          setWallet({
+  balance: data.wallet.balance,
+  total_deposit: 0,
+  total_withdrawal: 0,
+});
         }
       })
       .catch(console.error)
