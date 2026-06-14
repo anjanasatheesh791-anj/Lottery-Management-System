@@ -92,8 +92,11 @@ admin_commission,
 prize_pool,
 invite_code,
 status
+)
+VALUES
+(
+?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Open'
 )";
-
 $stmt = $conn->prepare($sql);
 
 if (!$stmt) {
