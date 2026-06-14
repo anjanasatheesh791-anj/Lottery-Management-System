@@ -3,6 +3,7 @@ import { FaWallet, FaArrowDown, FaArrowUp } from "react-icons/fa";
 
 export default function Wallet() {
   const userId = localStorage.getItem("user_id");
+  console.log("User ID:", userId);
 
   const [wallet, setWallet] = useState({
     balance: 0,
@@ -14,7 +15,7 @@ export default function Wallet() {
 
   useEffect(() => {
     fetch(
-      `https://lottery-management-system-backend.onrender.com/api/get_wallet.php?user_id=${userId}`
+      `https://lottery-management-system-backend.onrender.com/api/get_wallet.php?id=${userId}`
     )
       .then((res) => res.json())
       .then((data) => {
