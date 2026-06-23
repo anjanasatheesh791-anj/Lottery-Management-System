@@ -60,6 +60,12 @@ export default function Dashboard() {
 
   }, []); // <--- Crucial closing bracket that was breaking your code
 
+  const handleWithdraw = (e) => {
+    e.preventDefault();
+    alert(`Withdrawal request submitted for ₹${withdrawAmount}`);
+    setWithdrawAmount("");
+  };
+
   return (
     <div className="min-h-screen bg-gray-950 text-white flex">
       
@@ -125,16 +131,17 @@ export default function Dashboard() {
             <FaUsers /> Joined Pools
           </button>
 
-          <button 
+ 
+          {/* <button 
             onClick={() => setActiveTab("Wallet")}
             className={`flex items-center gap-4 px-5 py-4 rounded-2xl w-full text-left font-semibold transition duration-200 ${
-              activeTab === "Wallet" 
+              activeTab === "" 
                 ? "bg-purple-500 text-black" 
                 : "text-gray-400 hover:bg-gray-800 hover:text-white"
             }`}
           >
             <FaWallet /> Wallet
-          </button>
+          </button> */}
         
           <button 
             onClick={() => setActiveTab("myPools")}
