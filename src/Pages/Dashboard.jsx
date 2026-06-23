@@ -62,11 +62,16 @@ if (!userId || userId === "null" || userId === "undefined") {
 console.log("USER ID FOUND:", userId);
 console.log("LOCAL:", localStorage.getItem("userId"));
 console.log("SESSION:", sessionStorage.getItem("userId"));
-    fetch(`https://lottery-management-system-backend.onrender.com/api/get_wallet.php?id=${userId}`)
-      .then(async (res) => JSON.parse(await res.text()))
-      .then((walletData) => walletData.status === "success" && setWallet(walletData.wallets))
-      .catch((err) => console.log("WALLET FETCH ERROR:", err));
-  }, []);
+fetch(`https://lottery-management-system-backend.onrender.com/api/get_wallet.php?id=${userId}`)
+  .then((res) => res.json())
+  .then((walletData) => {
+    console.log("Wallet Response:", walletData);
+
+    if (walletData.status === "success") {
+      setWallet(walletData.wallet.balance);
+    }
+  })
+  .catch((err) => console.log("WALLET FETCH ERROR:", err));
 
   const handleWithdraw = (e) => {
     e.preventDefault();
