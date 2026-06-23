@@ -12,66 +12,84 @@ export default function Login() {
   const location = useLocation();
   const contestId = location.state?.contestId;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
-      const response = await fetch("https://lottery-management-system-backend.onrender.com/api/Login.php", {
+  setError("");
+  setLoading(true);
+
+  try {
+    const response = await fetch(
+      "https://lottery-management-system-backend.onrender.com/api/Login.php",
+      {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: email,
-          password: password,
+          email,
+          password,
         }),
+      }
+    );
+
+    const data = await response.json();
+
+    console.log("LOGIN RESPONSE:", data);
+
+    if (data.status === "success") {
+
+      console.log("USER OBJECT:", data.user);
+      console.log("USER ID:", data.user?.id);
+
+      // Save user ID
+      if (rememberMe) {
+        localStorage.setItem("userId", data.user.id);
+      } else {
+        sessionStorage.setItem("userId", data.user.id);
+      }
+
+      // Verify storage
+      console.log(
+        "Stored User ID:",
+        localStorage.getItem("userId") ||
+          sessionStorage.getItem("userId")
+      );
+
+      // Navigate
+      if (contestId) {
+        navigate(`/join-contest/${contestId}`);
+      } else {
+        navigate("/Dashboard");
+      }
+
+    } else if (data.status === "unverified") {
+
+      alert(data.message);
+
+      navigate("/verify-otp", {
+        state: {
+          userId: data.user_id,
+        },
       });
 
-      const data = await response.json();
+    } else {
 
-      if (data.status === "success") {
-        const userData = JSON.stringify(data.user);
-    // If "Remember Me" is checked, use LocalStorage (Permanent)
-    // Otherwise, use SessionStorage (Temporary)
-     
+      setError(data.message || "Login failed");
 
-    if (rememberMe) {
-
-    localStorage.setItem("userId", data.user.id);
-
-} else {
-
-    sessionStorage.setItem("userId", data.user.id);
-
-}
-
-
-
-
-
-        if (contestId) {
-     navigate(`/join-contest/${contestId}`);
-     }  else {
-    navigate("/Dashboard");
     }
-      } 
-      else if (data.status === "unverified") {
-        // Redirect back to OTP if they aren't verified
-        alert(data.message);
-        navigate("/verify-otp", { state: { userId: data.user_id } });
-      } 
-      else {
-        setError(data.message); // Show "Invalid credentials"
-      }
-    } catch (err) {
-      setError("Server connection failed. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
+  } catch (err) {
+
+    console.error("LOGIN ERROR:", err);
+    setError("Server connection failed. Please try again.");
+
+  } finally {
+
+    setLoading(false);
+
+  }
+};
   return (
     <div
       className="min-h-screen bg-cover bg-center flex justify-center items-center px-6 relative"
