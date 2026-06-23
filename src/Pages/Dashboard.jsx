@@ -11,13 +11,8 @@ import {
   FaGamepad,
   FaUserCircle,
   FaSignOutAlt,
-  FaArrowUp,
   FaArrowDown,
-  FaShareAlt,
   FaLayerGroup,
-  FaUserCheck,
-  FaSwimmer,
-  FaTicketAlt,
   FaGift
 } from "react-icons/fa";
 
@@ -31,56 +26,41 @@ export default function Dashboard() {
   const [wallet, setWallet] = useState(0);
   const [user, setUser] = useState(null);
   const [withdrawAmount, setWithdrawAmount] = useState("");
-  
-  // 2. NAVIGATION STATE: Tracks which panel is currently active
   const [activeTab, setActiveTab] = useState("dashboard"); 
 
   useEffect(() => {
     const userId = localStorage.getItem("userId") || sessionStorage.getItem("userId");
-    if (!userId) {
-      console.log("No userId found");
+    
+    if (!userId || userId === "null" || userId === "undefined") {
+      console.log("Invalid or missing user ID");
       return;
     }
 
+    console.log("Fetching data for User ID:", userId);
+
     /* ---------------- USER FETCH ---------------- */
     fetch(`https://lottery-management-system-backend.onrender.com/api/get_user.php?id=${userId}`)
-      .then(async (res) => JSON.parse(await res.text()))
-      .then((data) => data.status === "success" && setUser(data.user))
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "success") {
+          setUser(data.user);
+        }
+      })
       .catch((err) => console.log("USER FETCH ERROR:", err));
 
     /* ---------------- WALLET FETCH ---------------- */
+    fetch(`https://lottery-management-system-backend.onrender.com/api/get_wallet.php?id=${userId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Parsed Wallet Data:", data);
+        if (data.status === "success") {
+          setWallet(data.wallet.balance);
+        }
+      })
+      .catch((err) => console.log("Wallet Error:", err));
 
-  const userId =
-  localStorage.getItem("userId") ??
-  sessionStorage.getItem("userId");
+  }, []); // Properly closing useEffect hook
 
-if (!userId || userId === "null" || userId === "undefined") {
-  console.log("Invalid user ID:", userId);
-  return;
-}
-
-console.log("USER ID FOUND:", userId);
-console.log("LOCAL:", localStorage.getItem("userId"));
-console.log("SESSION:", sessionStorage.getItem("userId"));
-fetch(`https://lottery-management-system-backend.onrender.com/api/get_wallet.php?id=${userId}`)
-  .then((res) => {
-    console.log("Response Status:", res.status);
-    return res.text();
-  })
-  .then((text) => {
-    console.log("Raw Response:", text);
-
-    const data = JSON.parse(text);
-
-    console.log("Parsed Data:", data);
-
-    if (data.status === "success") {
-      setWallet(data.wallet.balance);
-    }
-  })
-  .catch((err) => {
-    console.log("Wallet Error:", err);
-  });
   const handleWithdraw = (e) => {
     e.preventDefault();
     alert(`Withdrawal request submitted for ₹${withdrawAmount}`);
@@ -108,7 +88,6 @@ fetch(`https://lottery-management-system-backend.onrender.com/api/get_wallet.php
 
         {/* MENU LINKS */}
         <div className="flex flex-col gap-3">
-          {/* Dashboard Nav Button */}
           <button 
             onClick={() => setActiveTab("dashboard")}
             className={`flex items-center gap-4 px-5 py-4 rounded-2xl w-full text-left font-semibold transition duration-200 ${
@@ -120,19 +99,17 @@ fetch(`https://lottery-management-system-backend.onrender.com/api/get_wallet.php
             <FaHome /> Dashboard
           </button>
 
-        <button 
-           onClick={() => setActiveTab("Pools")}
+          <button 
+            onClick={() => setActiveTab("Pools")}
             className={`flex items-center gap-4 px-5 py-4 rounded-2xl w-full text-left font-semibold transition duration-200 ${
               activeTab === "Pools" 
                 ? "bg-purple-500 text-black" 
                 : "text-gray-400 hover:bg-gray-800 hover:text-white"
             }`}
           >
-            <FaGift />  Pools
+            <FaGift /> Pools
           </button>
 
-
-          {/* 3. CONNECTED: Create Pools Nav Button */}
           <button 
             onClick={() => setActiveTab("createPool")}
             className={`flex items-center gap-4 px-5 py-4 rounded-2xl w-full text-left font-semibold transition duration-200 ${
@@ -143,11 +120,10 @@ fetch(`https://lottery-management-system-backend.onrender.com/api/get_wallet.php
           >
             <FaPlusCircle /> Create Pools
           </button>
- 
 
           <button 
-          onClick={() => setActiveTab("JoinedPools")}
-            className={`flex  items-center gap-4 px-5 py-4 rounded-2xl w-full text-left font-semibold transition duration-200 ${
+            onClick={() => setActiveTab("JoinedPools")}
+            className={`flex items-center gap-4 px-5 py-4 rounded-2xl w-full text-left font-semibold transition duration-200 ${
               activeTab === "JoinedPools" 
                 ? "bg-purple-500 text-black" 
                 : "text-gray-400 hover:bg-gray-800 hover:text-white"
@@ -157,26 +133,26 @@ fetch(`https://lottery-management-system-backend.onrender.com/api/get_wallet.php
           </button>
 
           <button 
-          onClick={() => setActiveTab("Wallet")}
-            className={`flex  items-center gap-4 px-5 py-4 rounded-2xl w-full text-left font-semibold transition duration-200 ${
+            onClick={() => setActiveTab("Wallet")}
+            className={`flex items-center gap-4 px-5 py-4 rounded-2xl w-full text-left font-semibold transition duration-200 ${
               activeTab === "Wallet" 
                 ? "bg-purple-500 text-black" 
                 : "text-gray-400 hover:bg-gray-800 hover:text-white"
             }`}
-          
           >
             <FaWallet /> Wallet
           </button>
         
-         <button 
+          <button 
             onClick={() => setActiveTab("myPools")}
             className={`flex items-center gap-4 px-5 py-4 rounded-2xl w-full text-left font-semibold transition duration-200 ${
               activeTab === "myPools" 
                 ? "bg-purple-500 text-black" 
                 : "text-gray-400 hover:bg-gray-800 hover:text-white"
             }`}
-          ><FaLayerGroup/>My Pools</button>
-
+          >
+            <FaLayerGroup/> My Pools
+          </button>
 
           <button className="flex items-center gap-4 hover:bg-gray-800 duration-300 px-5 py-4 rounded-2xl w-full text-left text-gray-400 hover:text-white">
             <FaHistory /> Transactions
@@ -192,17 +168,21 @@ fetch(`https://lottery-management-system-backend.onrender.com/api/get_wallet.php
         </button>
       </div>
 
-      {/* MAIN DYNAMIC CONTENT SLUDGE */}
-      {/* Added ml-[280px] to account for fixed sidebar positioning */}
+      {/* MAIN DYNAMIC CONTENT */}
       <div className="flex-1 ml-[280px] p-10 overflow-y-auto min-h-screen">
-        
-        {/* 4. CONDITIONAL RENDER: Show page based on activeTab state */}
         {activeTab === "createPool" ? (
           <CreatePool />
-        ) : activeTab === "myPools"? (<MyPools/>) : activeTab === "Pools"?(<Pools/>): activeTab === "JoinedPools"?<div className="w-full min-h-[70vh] flex items-center justify-center p-4">
-    <JoinedPools />
-  </div>: activeTab === "Wallet"? (<Wallet/>): (
-          /* STANDARD DEFAULT DASHBOARD VIEWS */
+        ) : activeTab === "myPools" ? (
+          <MyPools />
+        ) : activeTab === "Pools" ? (
+          <Pools />
+        ) : activeTab === "JoinedPools" ? (
+          <div className="w-full min-h-[70vh] flex items-center justify-center p-4">
+            <JoinedPools />
+          </div>
+        ) : activeTab === "Wallet" ? (
+          <Wallet />
+        ) : (
           <>
             {/* TOP HEADER */}
             <div className="flex justify-between items-center mb-10">
@@ -220,7 +200,7 @@ fetch(`https://lottery-management-system-backend.onrender.com/api/get_wallet.php
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
               <div className="bg-gray-900 border border-gray-800 rounded-3xl p-6">
                 <FaWallet className="text-4xl text-green-400 mb-4" />
-                <h2 className="text-3xl font-bold mb-2">₹ {wallet || 0}</h2>
+                <h2 className="text-3xl font-bold mb-2">₹ {wallet}</h2>
                 <p className="text-gray-400 text-sm">Wallet Balance</p>
               </div>
               <div className="bg-gray-900 border border-gray-800 rounded-3xl p-6">
@@ -242,7 +222,6 @@ fetch(`https://lottery-management-system-backend.onrender.com/api/get_wallet.php
 
             {/* BOTTOM DATA GRIDS */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              
               <div className="lg:col-span-2 flex flex-col gap-8">
                 {/* JOINED POOLS PANEL */}
                 <div className="bg-gray-900 border border-gray-800 rounded-3xl p-6">
@@ -300,12 +279,10 @@ fetch(`https://lottery-management-system-backend.onrender.com/api/get_wallet.php
                   </form>
                 </div>
               </div>
-
             </div>
           </>
         )}
       </div>
-
     </div>
   );
 }
