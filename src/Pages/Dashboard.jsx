@@ -36,8 +36,6 @@ export default function Dashboard() {
       return;
     }
 
-    console.log("Fetching data for User ID:", userId);
-
     /* ---------------- USER FETCH ---------------- */
     fetch(`https://lottery-management-system-backend.onrender.com/api/get_user.php?id=${userId}`)
       .then((res) => res.json())
@@ -49,29 +47,18 @@ export default function Dashboard() {
       .catch((err) => console.log("USER FETCH ERROR:", err));
 
     /* ---------------- WALLET FETCH ---------------- */
-    /* ---------------- WALLET FETCH ---------------- */
-fetch(`https://lottery-management-system-backend.onrender.com/api/get_wallet.php?id=${userId}`)
-  .then((res) => res.json()) // Safely handle standard JSON response
-  .then((data) => {
-    console.log("Wallet API raw payload response:", data);
-    
-    if (data.status === "success" && data.wallet) {
-      setWallet(data.wallet.balance);
-    } else {
-      console.log("Backend sent an error status:", data.message);
-      setWallet(0);
-    }
-  })
-  .catch((err) => {
-    console.log("Network or JSON Parsing Error:", err);
-    setWallet(0);
-  });
-  
-  const handleWithdraw = (e) => {
-    e.preventDefault();
-    alert(`Withdrawal request submitted for ₹${withdrawAmount}`);
-    setWithdrawAmount("");
-  };
+    fetch(`https://lottery-management-system-backend.onrender.com/api/get_wallet.php?id=${userId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Parsed Wallet Data inside state:", data);
+        if (data.status === "success") {
+          // This line will now successfully fire and update your card!
+          setWallet(data.wallet.balance); 
+        }
+      })
+      .catch((err) => console.log("Wallet Error:", err));
+
+  }, []); // <--- Crucial closing bracket that was breaking your code
 
   return (
     <div className="min-h-screen bg-gray-950 text-white flex">
