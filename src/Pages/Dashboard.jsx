@@ -63,16 +63,24 @@ console.log("USER ID FOUND:", userId);
 console.log("LOCAL:", localStorage.getItem("userId"));
 console.log("SESSION:", sessionStorage.getItem("userId"));
 fetch(`https://lottery-management-system-backend.onrender.com/api/get_wallet.php?id=${userId}`)
-  .then((res) => res.json())
-  .then((walletData) => {
-    console.log("Wallet Response:", walletData);
+  .then((res) => {
+    console.log("Response Status:", res.status);
+    return res.text();
+  })
+  .then((text) => {
+    console.log("Raw Response:", text);
 
-    if (walletData.status === "success") {
-      setWallet(walletData.wallet.balance);
+    const data = JSON.parse(text);
+
+    console.log("Parsed Data:", data);
+
+    if (data.status === "success") {
+      setWallet(data.wallet.balance);
     }
   })
-  .catch((err) => console.log("WALLET FETCH ERROR:", err));
-
+  .catch((err) => {
+    console.log("Wallet Error:", err);
+  });
   const handleWithdraw = (e) => {
     e.preventDefault();
     alert(`Withdrawal request submitted for ₹${withdrawAmount}`);
