@@ -49,6 +49,19 @@ export default function Dashboard() {
       .catch((err) => console.log("USER FETCH ERROR:", err));
 
     /* ---------------- WALLET FETCH ---------------- */
+
+  const userId =
+  localStorage.getItem("userId") ??
+  sessionStorage.getItem("userId");
+
+if (!userId || userId === "null" || userId === "undefined") {
+  console.log("Invalid user ID:", userId);
+  return;
+}
+
+console.log("USER ID FOUND:", userId);
+console.log("LOCAL:", localStorage.getItem("userId"));
+console.log("SESSION:", sessionStorage.getItem("userId"));
     fetch(`https://lottery-management-system-backend.onrender.com/api/get_wallet.php?id=${userId}`)
       .then(async (res) => JSON.parse(await res.text()))
       .then((walletData) => walletData.status === "success" && setWallet(walletData.wallets))
