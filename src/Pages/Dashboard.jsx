@@ -20,7 +20,7 @@ import CreatePool from "./CreatePool";
 import MyPools from "./Mypools";
 import Pools from "./Pools";
 import JoinedPools from "./JoinedPools"; 
-import Wallet from "./Wallet";
+
 
 export default function Dashboard() {
   const [wallet, setWallet] = useState(0);
@@ -49,18 +49,24 @@ export default function Dashboard() {
       .catch((err) => console.log("USER FETCH ERROR:", err));
 
     /* ---------------- WALLET FETCH ---------------- */
-    fetch(`https://lottery-management-system-backend.onrender.com/api/get_wallet.php?id=${userId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Parsed Wallet Data:", data);
-        if (data.status === "success") {
-          setWallet(data.wallet.balance);
-        }
-      })
-      .catch((err) => console.log("Wallet Error:", err));
-
-  }, []); // Properly closing useEffect hook
-
+    /* ---------------- WALLET FETCH ---------------- */
+fetch(`https://lottery-management-system-backend.onrender.com/api/get_wallet.php?id=${userId}`)
+  .then((res) => res.json()) // Safely handle standard JSON response
+  .then((data) => {
+    console.log("Wallet API raw payload response:", data);
+    
+    if (data.status === "success" && data.wallet) {
+      setWallet(data.wallet.balance);
+    } else {
+      console.log("Backend sent an error status:", data.message);
+      setWallet(0);
+    }
+  })
+  .catch((err) => {
+    console.log("Network or JSON Parsing Error:", err);
+    setWallet(0);
+  });
+  
   const handleWithdraw = (e) => {
     e.preventDefault();
     alert(`Withdrawal request submitted for ₹${withdrawAmount}`);
