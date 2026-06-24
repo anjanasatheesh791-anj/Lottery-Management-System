@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Wheel } from "react-custom-roulette";
 
 export default function SpinPage() {
 
@@ -17,6 +18,10 @@ export default function SpinPage() {
   const [winner, setWinner] = useState(null);
 
   const [loading, setLoading] = useState(true);
+
+  const [mustSpin, setMustSpin] = useState(false);
+
+const [prizeNumber, setPrizeNumber] = useState(0);
 
   // FETCH READY CONTESTS
 
@@ -100,102 +105,85 @@ export default function SpinPage() {
 
   const startSpin = async () => {
 
-    // SAFETY CHECK
+  if (!selectedContest) {
 
-    if (!selectedContest) {
+    alert("Please select a contest");
 
-      alert("Please select a contest");
+    return;
 
-      return;
+  }
 
-    }
+  if (participants.length === 0) {
 
-    if (participants.length === 0) {
+    alert("No participants found");
 
-      alert("No participants found");
+    return;
 
-      return;
+  }
 
-    }
+  try {
 
     setSpinning(true);
 
-    let currentIndex = 0;
+    const response = await axios.post(
+      "https://lottery-management-system-backend.onrender.com/api/spin_winner.php",
+      {
+        contest_id: selectedContest.id
+      }
+    );
 
-    // SPINNING ANIMATION
+    if (response.data.success) {
 
-    const spinInterval = setInterval(() => {
+      const winnerData =
+      response.data.winner;
 
-      setCurrentName(
-        participants[currentIndex].name
+      const winnerIndex =
+      participants.findIndex(
+        p => p.id == winnerData.id
       );
 
-      currentIndex++;
+      setPrizeNumber(
+        winnerIndex
+      );
 
-      if (currentIndex >= participants.length) {
+      setWinner(
+        winnerData
+      );
 
-        currentIndex = 0;
+      setMustSpin(true);
 
-      }
+    }
 
-    }, 100);
+    else {
 
-    // AFTER 5 SECONDS STOP SPIN
+      alert(
+        response.data.message
+      );
 
-    setTimeout(async () => {
+      setSpinning(false);
 
-      clearInterval(spinInterval);
+    }
 
-      try {
+  }
 
-        // CALL BACKEND WINNER SCRIPT
+  catch(error) {
 
-        const response = await axios.post(
-          "https://lottery-management-system-backend.onrender.com/api/spin_winner.php",
-          {
-            contest_id: selectedContest.id
-          }
-        );
+    console.log(error);
 
-        if (response.data.success) {
+    alert("Spin failed");
 
-          setWinner(response.data.winner);
+    setSpinning(false);
 
-          setCurrentName(
-            response.data.winner.name
-          );
+  }
 
-        }
-
-        else {
-
-          alert(response.data.message);
-
-        }
-
-      }
-
-      catch (error) {
-
-        console.log(error);
-
-        alert("Spin failed");
-
-      }
-
-      finally {
-
-        setSpinning(false);
-
-      }
-
-    }, 5000);
-
-  };
-
+};
   // LOADING SCREEN
 
   if (loading) {
+
+    const wheelData = participants.map((user) => ({
+  option: user.name
+   }));
 
     return (
 
@@ -284,54 +272,58 @@ export default function SpinPage() {
             </h2>
 
             {/* SPIN DISPLAY */}
+ <div style={{
+  width: "500px",
+  maxWidth: "100%"
+}}>
 
-            <div className="bg-black/40 border border-gray-800 rounded-3xl py-16 mb-8">
+  <Wheel
+    mustStartSpinning={mustSpin}
+    prizeNumber={prizeNumber}
+    data={wheelData}
+    outerBorderColor="#9333ea"
+    outerBorderWidth={8}
+    radiusLineColor="#ffffff"
+    radiusLineWidth={2}
+    textColors={["#ffffff"]}
+    backgroundColors={[
+      "#7c3aed",
+      "#9333ea",
+      "#a855f7",
+      "#c084fc"
+    ]}
+    onStopSpinning={() => {
 
-              {spinning ? (
+      setMustSpin(false);
 
-                <div>
+      setSpinning(false);
 
-                  <p className="text-gray-500 mb-4">
-                    Spinning...
-                  </p>
+    }}
+  />
 
-                  <h1 className="text-6xl font-extrabold text-yellow-400 animate-pulse">
-                    {currentName}
-                  </h1>
+</div>
 
-                </div>
+{/* WINNER DISPLAY */}
 
-              ) : winner ? (
+  {winner && !mustSpin && (
 
-                <div>
+    <div className="mt-8">
 
-                  <p className="text-green-400 text-xl mb-4">
-                    🎉 Winner Declared
-                  </p>
+      <h2 className="text-green-400 text-3xl font-bold">
+        🎉 Winner Declared
+      </h2>
 
-                  <h1 className="text-6xl font-extrabold text-green-400">
-                    {winner.username}
-                  </h1>
+      <h1 className="text-5xl font-extrabold text-yellow-400 mt-4">
+        {winner.name}
+      </h1>
 
-                  <p className="mt-6 text-2xl text-gray-300">
-                    Won ₹{selectedContest.prize_amount}
-                  </p>
+      <p className="text-xl text-gray-300 mt-4">
+        Won ₹{selectedContest.prize_amount}
+      </p>
 
-                </div>
+    </div>
 
-              ) : (
-
-                <div>
-
-                  <h1 className="text-5xl font-bold text-gray-500">
-                    Ready To Spin
-                  </h1>
-
-                </div>
-
-              )}
-
-            </div>
+  )}
 
             {/* START BUTTON */}
 
