@@ -13,8 +13,7 @@ export default function SpinPage() {
 
   const [spinning, setSpinning] = useState(false);
 
-  const [currentName, setCurrentName] = useState("");
-
+  
   const [winner, setWinner] = useState(null);
 
   const [loading, setLoading] = useState(true);
@@ -22,6 +21,10 @@ export default function SpinPage() {
   const [mustSpin, setMustSpin] = useState(false);
 
 const [prizeNumber, setPrizeNumber] = useState(0);
+
+    const wheelData = participants.map((user) => ({
+  option: user.name
+   }));
 
   // FETCH READY CONTESTS
 
@@ -181,9 +184,7 @@ const [prizeNumber, setPrizeNumber] = useState(0);
 
   if (loading) {
 
-    const wheelData = participants.map((user) => ({
-  option: user.name
-   }));
+
 
     return (
 
@@ -280,7 +281,11 @@ const [prizeNumber, setPrizeNumber] = useState(0);
   <Wheel
     mustStartSpinning={mustSpin}
     prizeNumber={prizeNumber}
-    data={wheelData}
+    data={
+  wheelData.length > 0
+    ? wheelData
+    : [{ option: "Waiting..." }]
+}
     outerBorderColor="#9333ea"
     outerBorderWidth={8}
     radiusLineColor="#ffffff"
