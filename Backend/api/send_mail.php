@@ -16,21 +16,21 @@ try {
     $mail->SMTPAuth = true;
 
     // Your Gmail address
-    $mail->Username = 'YOUR_GMAIL@gmail.com';
+    $mail->Username = 'spinvault.project@gmail.com';
 
     // Your App Password (NOT Gmail password)
-    $mail->Password = 'YOUR_16_CHARACTER_APP_PASSWORD';
+    $mail->Password = 'gaml wpsi igvd qngc';
 
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
     $mail->setFrom(
-        'YOUR_GMAIL@gmail.com',
+        'spinvault.project@gmail.com',
         'SpinVault'
     );
 
     // Change this to your own email for testing
-    $mail->addAddress('YOUR_TEST_EMAIL@gmail.com');
+    $mail->addAddress('anjanasatheesh791@gmail.com');
 
     $mail->isHTML(true);
 
