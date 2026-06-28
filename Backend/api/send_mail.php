@@ -1,53 +1,54 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+function sendWelcomeEmail($email, $name)
+{
+    $apiKey = getenv('BREVO_API_KEY');
 
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
+    $data = [
+        "sender" => [
+            "name" => "SpinVault",
+            "email" => "YOUR_PROJECT_GMAIL@gmail.com"
+        ],
 
-$mail = new PHPMailer(true);
+        "to" => [
+            [
+                "email" => $email,
+                "name" => $name
+            ]
+        ],
 
-try {
+        "subject" => "Welcome to SpinVault 🎉",
 
-    $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
-    $mail->SMTPAuth = true;
+        "htmlContent" => "
+            <h2>Welcome to SpinVault 🎉</h2>
+            <p>Hello $name,</p>
+            <p>Your account has been created successfully.</p>
+            <p>Thank you for joining SpinVault.</p>
+            <p>Have fun and good luck!</p>
+        "
+    ];
 
-    // Your Gmail address
-    $mail->Username = 'spinvault.project@gmail.com';
+    $ch = curl_init();
 
-    // Your App Password (NOT Gmail password)
-    $mail->Password = 'gaml wpsi igvd qngc';
+    curl_setopt_array($ch, [
+        CURLOPT_URL => "https://api.brevo.com/v3/smtp/email",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => json_encode($data),
+        CURLOPT_HTTPHEADER => [
+            "accept: application/json",
+            "api-key: $apiKey",
+            "content-type: application/json"
+        ]
+    ]);
 
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
+    $response = curl_exec($ch);
 
-    $mail->setFrom(
-        'spinvault.project@gmail.com',
-        'SpinVault'
-    );
+    if (curl_errno($ch)) {
+        return "cURL Error: " . curl_error($ch);
+    }
 
-    // Change this to your own email for testing
-    $mail->addAddress('anjanasatheesh791@gmail.com');
+    curl_close($ch);
 
-    $mail->isHTML(true);
-
-    $mail->Subject = 'Welcome to SpinVault';
-
-    $mail->Body = '
-        <h2>Welcome to SpinVault 🎉</h2>
-        <p>Your account has been created successfully.</p>
-        <p>Enjoy using SpinVault.</p>
-    ';
-
-    $mail->send();
-
-    echo "Email Sent Successfully";
-
-} catch (Exception $e) {
-
-    echo "Email Failed<br>";
-    echo $mail->ErrorInfo;
+    return $response;
 }
