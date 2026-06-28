@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -12,6 +13,24 @@ export default function Signup() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  const sendWelcomeEmail = async (name, email) => {
+  try {
+    await emailjs.send(
+      "service_5cu3dhd",
+      "template_ogxl10n",
+      {
+        name: name,
+        email: email,
+      },
+      "N76znlfRi-5xQGA86"
+    );
+
+    console.log("Welcome email sent");
+  } catch (error) {
+    console.error("Email sending failed:", error);
+  }
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,14 +86,17 @@ export default function Signup() {
       const otpData = await otpResponse.json();
 
       if (!otpData || otpData.status !== "success") {
-        setError(otpData?.message || "OTP generation failed");
-        return;
-      }
+  setError(otpData?.message || "OTP generation failed");
+  return;
+}
 
-      // STEP 3: NAVIGATE TO OTP PAGE
-      navigate("/OtpVerify", {
-        state: { userId: data.user_id },
-      });
+// SEND WELCOME EMAIL
+await sendWelcomeEmail(name, email);
+
+// STEP 3: NAVIGATE TO OTP PAGE
+navigate("/OtpVerify", {
+  state: { userId: data.user_id },
+});
 
     } catch (err) {
       console.error(err);
