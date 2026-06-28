@@ -16,7 +16,8 @@ export default function Signup() {
 
   const sendWelcomeEmail = async (name, email) => {
   try {
-    await emailjs.send(
+
+    const result = await emailjs.send(
       "service_5cu3dhd",
       "template_ogxl10n",
       {
@@ -26,9 +27,19 @@ export default function Signup() {
       "N76znlfRi-5xQGA86"
     );
 
-    console.log("Welcome email sent");
+    console.log("SUCCESS:", result);
+
   } catch (error) {
-    console.error("Email sending failed:", error);
+
+    console.log("FULL ERROR:", error);
+
+    if (error.text) {
+      console.log("ERROR TEXT:", error.text);
+    }
+
+    if (error.status) {
+      console.log("ERROR STATUS:", error.status);
+    }
   }
 };
 
@@ -91,7 +102,11 @@ export default function Signup() {
 }
 
 // SEND WELCOME EMAIL
+console.log("About to send email");
+
 await sendWelcomeEmail(name, email);
+
+console.log("Email function completed");
 
 // STEP 3: NAVIGATE TO OTP PAGE
 navigate("/OtpVerify", {
